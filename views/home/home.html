@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,136 +7,71 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Include your custom stylesheets here -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/css/home.css">    
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">HDFID</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">Accueil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="favorites.php">Favoris</a>
-                    </li>
-                </ul>
-                <form class="form-inline search-form" action="search.php" method="get">
-                    <input type="search" name="keyword" class="form-control search-input" placeholder="Rechercher un film...">
-                </form>
-                <div class="notification-icon">
-                    <i class="far fa-bell"></i>
-                    <div class="notification-box">
-                        <div class="notification-item">Notification 1</div>
-                        <div class="notification-item">Notification 2</div>
-                    </div>
-                </div>
-                <div class="user-icon">
-                    <?php if ($isLoggedIn): ?>
-                        <i class="fas fa-user"></i>
-                        <a href="logout.php">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>
-                    <?php else: ?>
-                        <a href="login.php">
-                            <i class="fas fa-sign-in-alt"></i>
-                        </a>
-                        <a href="registration.php">
-                            <i class="fas fa-user-plus"></i>
-                        </a>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar -->
-
-    <!-- Content -->
+<!-- Include 'base.html' en utilisant une URL relative -->
+    <?php include 'views/base.html'; ?>
     <section class="movie-trailer">
         <div class="video-container">
-            <video src="videos/trailer.mov" controls autoplay loop muted></video>
-        </div>
+            <video src="assets/trailer/trailer.mp4" controls autoplay loop muted></video>
+        </div>  
     </section>
-
     <div class="container" style="margin-top: 140px; max-width: 100%;">        
         <section class="random-movies-overlay">
             <h2>Films aléatoires</h2>
             <div class="movie-carousel">
-                <!-- Loop through randomMovies and generate movie cards -->
-                <?php foreach ($randomMovies as $movie): ?>
-                    <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="movie-card">
-                        <?php if ($movie['primaryImage']): ?>
-                            <img src="<?php echo $movie['primaryImage']['url']; ?>" alt="<?php echo $movie['titleText']['text']; ?>" class="movie-image">
-                        <?php else: ?>
-                            <div class="movie-default-image">
-                                <img src="images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
+            <?php if (!empty($randomMoviesResult['results'])) : ?>
+                    <?php foreach ($randomMoviesResult['results'] as $movie) : ?>
+                        <a href="<?php echo 'movie/' . $movie['id']; ?>" class="movie-card">
+                            <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
+                                <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
+                            <?php else : ?>
+                                <div class="movie-default-image">
+                                    <img src="assets/images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
+                                </div>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $movie['title']; ?></h5>
+                                <p class="card-text">Année de sortie: <?php echo $movie['release_date']; ?></p>
                             </div>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $movie['titleText']['text']; ?></h5>
-                            <p class="card-text">Année de sortie: <?php echo $movie['releaseYear']['year']; ?></p>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-                <!-- End loop -->
+                        </a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p>Aucun film disponible pour le moment.</p>
+                <?php endif; ?>
             </div>
         </section>
-
         <section class="most-viewed-movies">
             <h2>Films les plus vus</h2>
             <div class="movie-carousel">
-                <!-- Loop through mostViewedMovies and generate movie cards -->
-                <?php foreach ($mostViewedMovies as $movie): ?>
-                    <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="movie-card">
-                        <?php if ($movie['primaryImage']): ?>
-                            <img src="<?php echo $movie['primaryImage']['url']; ?>" alt="<?php echo $movie['titleText']['text']; ?>" class="movie-image">
-                        <?php else: ?>
-                            <div class="movie-default-image">
-                                <img src="images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
+                <?php if (!empty($popularMoviesResult['results'])) : ?>
+                    <?php foreach ($popularMoviesResult['results'] as $movie) : ?>
+                        <a href="<?php echo 'movie/' . $movie['id']; ?>" class="movie-card">
+                            <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
+                                <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
+                            <?php else : ?>
+                                <div class="movie-default-image">
+                                    <img src="assets/images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
+                                </div>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $movie['title']; ?></h5>
+                                <p class="card-text">Année de sortie: <?php echo $movie['release_date']; ?></p>
                             </div>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $movie['titleText']['text']; ?></h5>
-                            <p class="card-text">Année de sortie: <?php echo $movie['releaseYear']['year']; ?></p>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-                <!-- End loop -->
+                        </a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <p>Aucun film disponible pour le moment.</p>
+                <?php endif; ?>
             </div>
-        </section>
-
+        </section>              
         <section class="all-movies">
             <h2>Tous les films</h2>
             <div class="movie-carousel">
-                <!-- Loop through allMovies and generate movie cards -->
-                <?php foreach ($allMovies as $movie): ?>
-                    <a href="movie_detail.php?id=<?php echo $movie['id']; ?>" class="movie-card">
-                        <?php if ($movie['primaryImage']): ?>
-                            <img src="<?php echo $movie['primaryImage']['url']; ?>" alt="<?php echo $movie['titleText']['text']; ?>" class="movie-image">
-                        <?php else: ?>
-                            <div class="movie-default-image">
-                                <img src="images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
-                            </div>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $movie['titleText']['text']; ?></h5>
-                            <p class="card-text">Année de sortie: <?php echo $movie['releaseYear']['year']; ?></p>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-                <!-- End loop -->
+                <!-- Code pour tous les films ici -->
             </div>
         </section>
     </div>
-    <!-- End Content -->
-
-    <!-- JavaScript code can be included here -->
 </body>
 </html>

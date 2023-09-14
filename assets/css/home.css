@@ -1,0 +1,86 @@
+
+/* Style pour la section du trailer de film */
+.movie-trailer {
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; 
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Masquer les contrôles vidéo pour rendre la vidéo en plein écran */
+.video-container video::-webkit-media-controls {
+    display: none;
+}
+
+.video-container video::-webkit-media-controls-enclosure {
+    display: none;
+}
+
+.video-container video::-webkit-media-controls-panel {
+    display: none;
+}
+
+/* Style pour la section du trailer de film */
+.movie-trailer {
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    height: 500px; 
+}
+
+.video-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; 
+}
+
+.video-container video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Masquer les contrôles vidéo pour rendre la vidéo en plein écran */
+.video-container video::-webkit-media-controls {
+    display: none;
+}
+
+.video-container video::-webkit-media-controls-enclosure {
+    display: none;
+}
+
+.video-container video::-webkit-media-controls-panel {
+    display: none;
+}
+
+
+.random-movies-overlay {
+    position: absolute;
+    top: 350px; 
+    left: 0;
+    right: 0;
+    background-color: black;
+    padding: 20px; 
+    color: white; 
+    z-index: 1; 
+    background: transparent;
+}

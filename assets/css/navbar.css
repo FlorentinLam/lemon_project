@@ -1,0 +1,95 @@
+/* Style pour la barre de navigation */
+.navbar {
+    background-color: transparent;
+    transition: background-color 0.3s;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    color: white;
+  }
+  
+  /* Style pour la barre de navigation lorsqu'elle est défilée */
+  .navbar.scrolled {
+    background-color: #111;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s;
+  }
+
+/* Style pour les liens de navigation */
+.navbar-nav .nav-link {
+    margin-right: 20px;
+    color: white !important; 
+}
+
+/* Style pour les liens de navigation au survol */
+.navbar-nav .nav-link:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+    color: white !important;
+}
+
+/* Style pour le logo de la barre de navigation */
+.navbar-brand {
+    font-size: 24px;
+    margin-right: 20px;
+    color: white !important; 
+}
+
+/* Style pour l'icône de notification */
+.notification-icon {
+    position: relative;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+.notification-box {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    width: 250px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    display: none;
+    z-index: 1000;
+}
+
+.notification-icon:hover .notification-box {
+    display: block;
+}
+
+.notification-item {
+    margin-bottom: 10px;
+}
+
+/* Style pour l'icône utilisateur */
+.user-icon {
+    margin-right: 20px;
+}
+
+.user-icon a {
+    color: white !important; 
+    font-size: 18px;
+}
+
+/* Style pour l'icône utilisateur au survol */
+.user-icon a:hover {
+    color: #ccc;
+}
+
+.search-input {
+    width: 200px; 
+    padding: 8px 15px;
+    border: none;
+    border-bottom: 2px solid #fff;
+    background-color: transparent;
+    color: #fff;
+}
+
+.search-input::placeholder {
+    color: #fff;
+}
