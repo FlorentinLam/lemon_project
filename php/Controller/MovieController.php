@@ -17,6 +17,14 @@ class MovieController {
         if (!empty($randomMoviesResult['results'])) {
             // Mélangez les résultats de manière aléatoire
             shuffle($randomMoviesResult['results']);
+
+            $randomMovieId = $randomMoviesResult['results'][0]['id'];
+
+            $videos = $this->apiService->getMovieVideos($randomMovieId);
+            if  (!empty($videos['results'])) {
+                // Affichez la première vidéo (ou la vidéo de votre choix)
+                $videoKey = $videos['results'][0]['key'];
+                }
         }
         
         include __DIR__ . '/../../views/home/home.html';

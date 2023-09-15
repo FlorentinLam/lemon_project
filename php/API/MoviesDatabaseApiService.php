@@ -63,4 +63,10 @@ class MoviesDatabaseApiService
         $endpoint = 'movie/now_playing';
         return $this->sendRequest($endpoint);
     }
+
+    public function getMovieVideos(int $movieId): ?array
+    {
+        $endpoint = 'movie/' . $movieId . '/videos';
+        return $this->sendRequest($endpoint);
+    }
 }

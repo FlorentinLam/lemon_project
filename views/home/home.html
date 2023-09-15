@@ -3,20 +3,22 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HDFID - Films</title>
+    <title>Lemon Interactive - Films</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/home.css">    
 </head>
 <body>
+<iframe src="https://www.youtube.com/embed/<?php echo $videoKey; ?>?autoplay=1&mute=1&loop=1&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen></iframe>
+
 <!-- Include 'base.html' en utilisant une URL relative -->
     <?php include 'views/base.html'; ?>
     <section class="movie-trailer">
         <div class="video-container">
-            <video src="assets/trailer/trailer.mp4" controls autoplay loop muted></video>
         </div>  
     </section>
+
     <div class="container" style="margin-top: 140px; max-width: 100%;">        
         <section class="random-movies-overlay">
             <h2>Films aléatoires</h2>

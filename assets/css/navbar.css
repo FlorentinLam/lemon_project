@@ -42,6 +42,7 @@
     position: relative;
     margin-right: 20px;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 .notification-box {
@@ -92,4 +93,8 @@
 
 .search-input::placeholder {
     color: #fff;
+}
+
+i.fas.fa-user-plus{
+    margin-left: 5px;
 }

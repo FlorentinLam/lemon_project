@@ -72,10 +72,9 @@
     display: none;
 }
 
-
 .random-movies-overlay {
     position: absolute;
-    top: 350px; 
+    top: 520px; 
     left: 0;
     right: 0;
     background-color: black;
@@ -83,4 +82,17 @@
     color: white; 
     z-index: 1; 
     background: transparent;
+}
+
+iframe {
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+section.most-viewed-movies{
+    margin-top: 20%;
 }
