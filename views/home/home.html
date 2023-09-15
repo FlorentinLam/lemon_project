@@ -24,9 +24,9 @@
             <h2>Films aléatoires</h2>
             <div class="movie-carousel">
             <?php if (!empty($randomMoviesResult['results'])) : ?>
-                    <?php foreach ($randomMoviesResult['results'] as $movie) : ?>
-                        <a href="<?php echo 'movie/' . $movie['id']; ?>" class="movie-card">
-                            <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
+                <?php foreach ($randomMoviesResult['results'] as $movie) : ?>
+                    <a href="<?php echo 'movie-details?id=' . $movie['id']; ?>" class="movie-card">
+                        <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
                                 <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
                             <?php else : ?>
                                 <div class="movie-default-image">

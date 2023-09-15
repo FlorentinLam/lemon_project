@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du film - <?php echo $movieDetails['title']; ?></title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/movie-details.css">
+</head>
+<body>
+    <!-- Include 'base.html' en utilisant une URL relative -->
+    <?php include 'views/base.html'; ?>
+    <div class="container" style="padding-top: 80px;">
+        <div class="movie-details">
+            <div class="row">
+                <div class="col-md-4">
+                    <?php if (isset($movieDetails['poster_path']) && !empty($movieDetails['poster_path'])) : ?>
+                        <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movieDetails['poster_path']; ?>" alt="<?php echo $movieDetails['title']; ?>" class="movie-image">
+                    <?php else : ?>
+                        <div class="movie-default-image">
+                            <img src="assets/images/default_image.jpg" alt="Image du film par défaut" class="movie-image img-fluid">
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="col-md-8">
+                    <h2 class="movie-title"><?php echo $movieDetails['title']; ?></h2>
+                    <p class="movie-release-year">Année de sortie: <?php echo substr($movieDetails['release_date'], 0, 4); ?></p>
+                    <p class="movie-overview"><?php echo $movieDetails['overview']; ?></p>
+                    <?php if (isset($_SESSION['user_id'])) : ?>
+                        <?php if (isset($isFavorite) && $isFavorite) : ?>
+                            <form action="<?php echo 'remove_from_favorites?id=' . $movieDetails['id']; ?>" method="post">
+                                <button type="submit" class="btn btn-danger">Retirer des favoris</button>
+                            </form>
+                        <?php else : ?>
+                            <form action="<?php echo 'add_to_favorites?id=' . $movieDetails['id']; ?>" method="post">
+                                <button type="submit" class="btn btn-primary">Ajouter aux favoris</button>
+                            </form>
+                        <?php endif; ?>
+                    <?php else : ?>
+                        <p class="not-logged-in">Connectez-vous pour ajouter ce film aux favoris.</p>
+                        <a href="login" class="btn btn-primary">Connexion</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

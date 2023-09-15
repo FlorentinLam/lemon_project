@@ -36,6 +36,10 @@ switch ($action) {
         $controller = new LoginController();
         $controller->login();
         break;
+    case 'logout':
+        $controller = new LoginController();
+        $controller->logout();
+        break;
     case 'register':
         $controller = new UserController();
         $controller->renderRegister();
@@ -44,10 +48,11 @@ switch ($action) {
         $controller = new UserController();
         $controller->register();
         break;
-    case 'logout':
-        $controller = new LoginController();
-        $controller->logout();
+    case 'movie-details':
+        $controller = new MovieController($apiKey);
+        $controller->renderMovieDetails($_GET['id']);
         break;
+    
     default:
         echo 'Page non trouvée';
 }

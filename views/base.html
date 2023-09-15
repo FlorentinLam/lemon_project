@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +41,6 @@
                 </div>
                 <div class="user-icon">
                     <?php
-                    session_start();
                     if (isset($_SESSION['user_id'])) {
                         // L'utilisateur est connecté, affichez le bouton de déconnexion
                         echo '<i class="fas fa-user"></i>';
