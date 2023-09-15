@@ -615,3 +615,8 @@
 2023-09-15 15:22:28 Request URI: /lemon_project/search?keyword=tata
 2023-09-15 15:22:28 Request URI: /lemon_project/assets/images/default_image.jpg
 2023-09-15 15:22:28 Request URI: /lemon_project/assets/images/default_image.jpg
+2023-09-15 15:23:56 Request URI: /lemon_project/home
+2023-09-15 15:25:41 Request URI: /lemon_project/movie-details?id=912908
+2023-09-15 15:25:41 Request URI: /lemon_project/assets/css/movie-details.css
+2023-09-15 15:26:32 Request URI: /lemon_project/movie-details?id=912908
+2023-09-15 15:26:32 Request URI: /lemon_project/assets/css/movie-details.css

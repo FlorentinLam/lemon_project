@@ -27,6 +27,17 @@
                     <h2 class="movie-title"><?php echo $movieDetails['title']; ?></h2>
                     <p class="movie-release-year">Année de sortie: <?php echo substr($movieDetails['release_date'], 0, 4); ?></p>
                     <p class="movie-overview"><?php echo $movieDetails['overview']; ?></p>
+                    <p class="movie-info">Budget: $<?php echo number_format($movieDetails['budget']); ?></p>
+                    <p class="movie-info">Genres: 
+                        <?php foreach ($movieDetails['genres'] as $genre) : ?>
+                            <?php echo $genre['name']; ?>,
+                        <?php endforeach; ?>
+                    </p>
+                    <p class="movie-info">Langues: 
+                        <?php foreach ($movieDetails['spoken_languages'] as $language) : ?>
+                            <?php echo $language['name']; ?>,
+                        <?php endforeach; ?>
+                    </p>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <?php if (isset($isFavorite) && $isFavorite) : ?>
                             <form action="remove-from-favorites" method="post">
