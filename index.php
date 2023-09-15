@@ -10,6 +10,7 @@ require_once(__DIR__ . '/php/database_config.php');
 require_once __DIR__ . '/php/Controller/MovieController.php';
 require_once __DIR__ . '/php/Controller/LoginController.php';
 require_once __DIR__ . '/php/Controller/UserController.php';
+require_once __DIR__ . '/php/Controller/SearchController.php';
 
 $logFilePath = __DIR__ . '/logs/debug.log';
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -64,6 +65,10 @@ switch ($action) {
     case 'remove-from-favorites':
         $controller = new MovieController($apiKey);
         $controller->removeMovieFromFavorite($_GET['id']);
+        break;
+    case 'search':
+        $controller = new SearchController($apiKey);
+        $controller->renderSearchPage();
         break;
     default:
         echo 'Page non trouvée';

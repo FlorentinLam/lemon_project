@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HDFID - Résultats de recherche</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+    <!-- Include 'base.html' en utilisant une URL relative -->
+    <?php include 'views/base.html'; ?>
+    <div class="container" style="padding-top: 80px;">
+        <h2>Résultats de la recherche pour : "<?php echo $query; ?>"</h2>
+        <div class="row">
+            <?php if ($movies) : ?>
+            <?php foreach ($movies['results'] as $movie) : ?>
+                <div class="col-md-2">
+                    <a href="<?php echo 'movie-details?id=' . $movie['id']; ?>" class="movie-card">
+                        <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
+                            <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
+                        <?php else : ?>
+                            <div class="movie-default-image">
+                                <img src="<?php echo 'assets/images/default_image.jpg'; ?>" alt="Image du film par défaut" class="movie-image img-fluid">
+                            </div>
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $movie['title']; ?></h5>
+                            <p class="card-text">Année de sortie: <?php echo $movie['release_date']; ?></p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>Aucun résultat trouvé pour votre recherche.</p>
+        <?php endif; ?>
+        
+        </div>
+    </div>
+</body>
+</html>

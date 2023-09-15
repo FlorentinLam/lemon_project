@@ -91,4 +91,11 @@ class MoviesDatabaseApiService
         return $favoriteMoviesDetails;
     }
 
+    public function searchMovies(string $query): ?array
+    {
+        $endpoint = 'search/movie';
+        $query = ['query' => $query];
+        return $this->sendRequest($endpoint, $query);
+    }
+
 }
