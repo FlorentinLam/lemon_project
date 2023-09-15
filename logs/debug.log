@@ -565,3 +565,17 @@
 2023-09-15 15:06:15 Request URI: /lemon_project/assets/css/movie-details.css
 2023-09-15 15:06:16 Request URI: /lemon_project/add-to-favorites?id=83533
 2023-09-15 15:06:16 Request URI: /lemon_project/favorite
+2023-09-15 15:09:03 Request URI: /lemon_project/favorite
+2023-09-15 15:09:06 Request URI: /lemon_project/favorite
+2023-09-15 15:09:07 Request URI: /lemon_project/favorite
+2023-09-15 15:10:03 Request URI: /lemon_project/favorite
+2023-09-15 15:10:05 Request URI: /lemon_project/favorite
+2023-09-15 15:10:58 Request URI: /lemon_project/favorite
+2023-09-15 15:11:12 Request URI: /lemon_project/favorite
+2023-09-15 15:11:17 Request URI: /lemon_project/favorite
+2023-09-15 15:11:23 Request URI: /lemon_project/home
+2023-09-15 15:11:29 Request URI: /lemon_project/favorite
+2023-09-15 15:11:35 Request URI: /lemon_project/favorite
+2023-09-15 15:11:37 Request URI: /lemon_project/search?keyword=test
+2023-09-15 15:11:37 Request URI: /lemon_project/assets/images/default_image.jpg
+2023-09-15 15:11:37 Request URI: /lemon_project/assets/images/default_image.jpg

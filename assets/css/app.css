@@ -177,3 +177,8 @@ h2 {
 .movie-carousel-container:hover .movie-carousel::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.7); 
 }
+
+.col-md-2 {
+    margin-bottom: 40px;
+    margin-right: 20px;
+}

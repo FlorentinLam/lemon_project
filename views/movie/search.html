@@ -15,27 +15,26 @@
         <h2>Résultats de la recherche pour : "<?php echo $query; ?>"</h2>
         <div class="row">
             <?php if ($movies) : ?>
-            <?php foreach ($movies['results'] as $movie) : ?>
-                <div class="col-md-2">
-                    <a href="<?php echo 'movie-details?id=' . $movie['id']; ?>" class="movie-card">
-                        <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
-                            <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
-                        <?php else : ?>
-                            <div class="movie-default-image">
-                                <img src="<?php echo 'assets/images/default_image.jpg'; ?>" alt="Image du film par défaut" class="movie-image img-fluid">
+                <?php foreach ($movies['results'] as $movie) : ?>
+                    <div class="col-md-2">
+                        <a href="<?php echo 'movie-details?id=' . $movie['id']; ?>" class="movie-card">
+                            <?php if (isset($movie['poster_path']) && !empty($movie['poster_path'])) : ?>
+                                <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $movie['poster_path']; ?>" alt="<?php echo $movie['title']; ?>" class="movie-image">
+                            <?php else : ?>
+                                <div class="movie-default-image">
+                                    <img src="<?php echo 'assets/images/default_image.jpg'; ?>" alt="Image du film par défaut" class="movie-image img-fluid">
+                                </div>
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $movie['title']; ?></h5>
+                                <p class="card-text">Année de sortie: <?php echo $movie['release_date']; ?></p>
                             </div>
-                        <?php endif; ?>
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $movie['title']; ?></h5>
-                            <p class="card-text">Année de sortie: <?php echo $movie['release_date']; ?></p>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        <?php else : ?>
-            <p>Aucun résultat trouvé pour votre recherche.</p>
-        <?php endif; ?>
-        
+                        </a>
+                    </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>Aucun résultat trouvé pour votre recherche.</p>
+            <?php endif; ?>
         </div>
     </div>
 </body>
