@@ -2,6 +2,7 @@
 // Active l'affichage des erreurs PHP (pour le débogage)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+session_start();
 
 // Incluez le fichier de configuration global
 include __DIR__ . '/config.php';
@@ -52,7 +53,14 @@ switch ($action) {
         $controller = new MovieController($apiKey);
         $controller->renderMovieDetails($_GET['id']);
         break;
-    
+    case 'favorite':
+        $controller = new MovieController($apiKey);
+        $controller->renderFavoriteMovies();
+        break;
+    case 'add-to-favorites':
+        $controller = new MovieController($apiKey);
+        $controller->addMovieToFavorite($_GET['id']);
+        break;    
     default:
         echo 'Page non trouvée';
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HDFID - Favoris</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><text y='1.2em' font-size='96'>⚫️</text></svg>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+    <!-- Include 'base.html' en utilisant une URL relative -->
+    <?php include 'views/base.html'; ?>
+    <div class="container" style="padding-top: 80px;">
+        <h2>Vos films favoris</h2>
+        <div class="row">
+            <?php foreach ($favoriteMoviesDetails as $favorite) : ?>
+                <div class="col-md-2">
+                    <a href="<?php echo 'movie-details?id=' . $favorite['id']; ?>" class="movie-card">
+                        <img src="<?php echo 'https://image.tmdb.org/t/p/w500/' . $favorite['poster_path']; ?>" alt="<?php echo $favorite['title']; ?>" class="movie-image">
+                        <div class="card-body">
+                            <h5 class="card-title"><?php echo $favorite['title']; ?></h5>
+                            <p class="card-text">Année de sortie: <?php echo $favorite['releaseYear'] ?? 'Information non disponible'; ?></p>
+                        </div>
+                    </a>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <?php if (empty($favoriteMoviesDetails)) : ?>
+            <p>Vous n'avez pas encore ajouté de films à vos favoris.</p>
+        <?php endif; ?>
+    </div>
+</body>
+</html>

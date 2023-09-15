@@ -33,9 +33,10 @@
                                 <button type="submit" class="btn btn-danger">Retirer des favoris</button>
                             </form>
                         <?php else : ?>
-                            <form action="<?php echo 'add_to_favorites?id=' . $movieDetails['id']; ?>" method="post">
-                                <button type="submit" class="btn btn-primary">Ajouter aux favoris</button>
-                            </form>
+                        <form action="add-to-favorites?id=<?php echo $movieDetails['id']; ?>" method="post">
+                            <input type="hidden" name="movie_id" value="<?php echo $movieDetails['id']; ?>">
+                            <button type="submit" class="btn btn-primary">Ajouter aux favoris</button>
+                        </form>                        
                         <?php endif; ?>
                     <?php else : ?>
                         <p class="not-logged-in">Connectez-vous pour ajouter ce film aux favoris.</p>

@@ -75,4 +75,20 @@ class MoviesDatabaseApiService
         $endpoint = 'movie/' . $movieId;
         return $this->sendRequest($endpoint);
     }
+
+    public function getFavoriteMoviesDetails(array $movieIds): ?array
+    {
+        $favoriteMoviesDetails = [];
+
+        foreach ($movieIds as $movieId) {
+            $movieDetails = $this->getMovieDetails($movieId);
+
+            if ($movieDetails) {
+                $favoriteMoviesDetails[] = $movieDetails;
+            }
+        }
+
+        return $favoriteMoviesDetails;
+    }
+
 }

@@ -42,17 +42,47 @@ class MovieController {
         }
     }
 
-    public function addMovieToFavorite($movieId) {
-        $pdo = connect();
+    public function renderFavoriteMovies() {
         $user_id = $_SESSION['user_id']; // Récupérez l'ID de l'utilisateur à partir de la session
-        $stmt = $pdo->prepare("INSERT INTO favorite_movies (user_id, movie_id) VALUES (:userId, :movieId)");
+        if(!isset($user_id)) {
+            header('Location: login');
+            exit();
+        }
 
-        $stmt->bindParam(':userId', $user_id);  
-        $stmt->bindParam(':movieId', $movieId);
+        $pdo = connect();
+    
+        $stmt = $pdo->prepare("SELECT film_id FROM favorite WHERE user_id = :userId");
+        $stmt->bindParam(':userId', $user_id);
         $stmt->execute();
-        header('Location: home');
-        exit();
-
+    
+        $favoriteMovies = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $favoriteMoviesIds = array_column($favoriteMovies, 'film_id');
+    
+        $favoriteMoviesDetails = $this->apiService->getFavoriteMoviesDetails($favoriteMoviesIds);
+    
+        include __DIR__ . '/../../views/movie/favorite.html';
     }
     
+    public function addMovieToFavorite($movieId) {
+        // Vérifiez si une demande POST a été soumise
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Récupérez l'ID du film depuis le formulaire
+            if (isset($_POST['movie_id'])) {
+                $movieId = $_POST['movie_id'];
+                
+                // Récupérez l'ID de l'utilisateur à partir de la session
+                $userId = $_SESSION['user_id'];
+                
+                // Ajoutez le film aux favoris
+                $pdo = connect();
+                $stmt = $pdo->prepare("INSERT INTO favorite (user_id, film_id) VALUES (:userId, :movieId)");
+                $stmt->bindParam(':userId', $userId);
+                $stmt->bindParam(':movieId', $movieId);
+                $stmt->execute();
+                
+                header('Location: favorite');
+                exit();
+            }
+        }
+    }
 }
