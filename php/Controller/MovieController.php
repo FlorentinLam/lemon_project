@@ -31,8 +31,10 @@ class MovieController {
     }
 
     public function renderMovieDetails($movieId) {
-        // Récupérez les détails du film en fonction de $movieId depuis votre source de données
-        $movieDetails = $this->apiService->getMovieDetails($movieId); 
+
+        $user_id = $_SESSION['user_id']; 
+        $movieDetails = $this->apiService->getMovieDetails($movieId);
+        $isFavorite = $this->isMovieInFavorites($user_id, $movieId); 
     
         // Vérifiez si vous avez réussi à récupérer les détails du film
         if ($movieDetails) {
@@ -41,6 +43,23 @@ class MovieController {
             echo "Détails du film introuvables.";
         }
     }
+
+    public function isMovieInFavorites($userId, $movieId) {
+        $pdo = connect();
+    
+        // Requête pour vérifier si le film existe dans les favoris de l'utilisateur
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM favorite WHERE user_id = :userId AND film_id = :movieId");
+        $stmt->bindParam(':userId', $userId);
+        $stmt->bindParam(':movieId', $movieId);
+        $stmt->execute();
+    
+        // Récupérez le résultat de la requête
+        $count = $stmt->fetchColumn();
+    
+        // Si $count est supérieur à zéro, le film est dans les favoris de l'utilisateur
+        return $count > 0;
+    }
+    
 
     public function renderFavoriteMovies() {
         $user_id = $_SESSION['user_id']; // Récupérez l'ID de l'utilisateur à partir de la session
@@ -76,6 +95,31 @@ class MovieController {
                 // Ajoutez le film aux favoris
                 $pdo = connect();
                 $stmt = $pdo->prepare("INSERT INTO favorite (user_id, film_id) VALUES (:userId, :movieId)");
+                $stmt->bindParam(':userId', $userId);
+                $stmt->bindParam(':movieId', $movieId);
+                $stmt->execute();
+                
+                header('Location: favorite');
+                exit();
+            }
+        }
+    }
+
+    public function removeMovieFromFavorite($movieId) {
+        // Vérifiez si une demande POST a été soumise
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            // Récupérez l'ID du film depuis le formulaire
+            if (isset($_POST['movie_id'])) {
+
+                $movieId = $_POST['movie_id'];
+                
+                // Récupérez l'ID de l'utilisateur à partir de la session
+                $userId = $_SESSION['user_id'];
+                
+                // Supprimez le film des favoris
+                $pdo = connect();
+                $stmt = $pdo->prepare("DELETE FROM favorite WHERE user_id = :userId AND film_id = :movieId");
                 $stmt->bindParam(':userId', $userId);
                 $stmt->bindParam(':movieId', $movieId);
                 $stmt->execute();

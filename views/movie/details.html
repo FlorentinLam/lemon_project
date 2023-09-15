@@ -29,9 +29,10 @@
                     <p class="movie-overview"><?php echo $movieDetails['overview']; ?></p>
                     <?php if (isset($_SESSION['user_id'])) : ?>
                         <?php if (isset($isFavorite) && $isFavorite) : ?>
-                            <form action="<?php echo 'remove_from_favorites?id=' . $movieDetails['id']; ?>" method="post">
+                            <form action="remove-from-favorites" method="post">
+                                <input type="hidden" name="movie_id" value="<?php echo $movieDetails['id']; ?>">
                                 <button type="submit" class="btn btn-danger">Retirer des favoris</button>
-                            </form>
+                            </form>                        
                         <?php else : ?>
                         <form action="add-to-favorites?id=<?php echo $movieDetails['id']; ?>" method="post">
                             <input type="hidden" name="movie_id" value="<?php echo $movieDetails['id']; ?>">

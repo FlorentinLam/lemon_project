@@ -61,6 +61,10 @@ switch ($action) {
         $controller = new MovieController($apiKey);
         $controller->addMovieToFavorite($_GET['id']);
         break;    
+    case 'remove-from-favorites':
+        $controller = new MovieController($apiKey);
+        $controller->removeMovieFromFavorite($_GET['id']);
+        break;
     default:
         echo 'Page non trouvée';
 }
