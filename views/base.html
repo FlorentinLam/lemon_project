@@ -37,12 +37,18 @@
                     </div>
                 </div>
                 <div class="user-icon">
-                    <a href="login">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </a>
-                    <a href="registration">
-                        <i class="fas fa-user-plus"></i>
-                    </a>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['user_id'])) {
+                        // L'utilisateur est connecté, affichez le bouton de déconnexion
+                        echo '<i class="fas fa-user"></i>';
+                        echo '<a href="logout"><i class="fas fa-sign-out-alt"></i></a>';
+                    } else {
+                        // L'utilisateur n'est pas connecté, affichez les boutons de connexion et d'inscription
+                        echo '<a href="login"><i class="fas fa-sign-in-alt"></i></a>';
+                        echo '<a href="register"><i class="fas fa-user-plus"></i></a>';
+                    }
+                    ?>
                 </div>
             </div>
         </div>

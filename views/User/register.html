@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <title>Lemon Interactive - S'inscrire</title>
+</head>
+<body>
+    <?php include 'views/base.html'; ?>
+    <div class="container" style="padding-top: 80px;">
+        <h1>S'inscrire</h1>
+        <form method="post" action="register-submit">
+            <div class="form-group">
+                <label for="firstName">Prénom</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Prénom">
+            </div>
+            <div class="form-group">
+                <label for="lastName">Nom de famille</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Nom de famille">
+            </div>
+            <div class="form-group">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Adresse e-mail">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe">
+            </div>
+            <div class="form-group">
+                <label for="address">Adresse</label>
+                <input type="text" id="address" name="address" class="form-control" placeholder="Adresse">
+            </div>
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+            <!-- Si vous avez d'autres champs de formulaire, vous pouvez les ajouter ici -->
+        </form>
+    </div>
+    <!-- Ajoutez vos scripts JavaScript ici si nécessaire -->
+</body>
+</html>

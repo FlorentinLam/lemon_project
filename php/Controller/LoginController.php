@@ -10,41 +10,42 @@ class LoginController {
 
     public function login() {
         // Récupérez les données du formulaire
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+        $email = $_POST['_email'];
+        $password = $_POST['_password'];
     
         // Obtenez la connexion à la base de données
         $pdo = connect();
     
         // Recherchez l'utilisateur en fonction de l'e-mail
-        $stmt = $pdo->prepare("SELECT id, email, password FROM users WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT id, email, password FROM user WHERE email = :email");
         $stmt->bindParam(':email', $email);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if (!$user) {
-            // L'utilisateur n'existe pas, gérer l'erreur
-            // Par exemple, affichez un message d'erreur et redirigez vers la page de connexion
-            echo "L'utilisateur n'existe pas.";
-            return;
+            $_SESSION['error_message'] = "Le compte n'existe pas. Veuillez vérifier votre adresse e-mail.";
+            header('Location: login'); // Redirigez vers la page de connexion
+            exit();
         }
     
         // Vérifiez le mot de passe
         if (password_verify($password, $user['password'])) {
-            // Mot de passe correct, connectez l'utilisateur
-            // Vous pouvez gérer la session de l'utilisateur ici
-            // Par exemple, utilisez $_SESSION pour stocker des informations d'authentification
             session_start();
             $_SESSION['user_id'] = $user['id'];
-            // Redirigez l'utilisateur vers la page d'accueil ou toute autre page appropriée
-            header('Location: /home');
+            header('Location: home');
             exit();
         } else {
             // Mot de passe incorrect, gérer l'erreur
-            // Par exemple, affichez un message d'erreur et redirigez vers la page de connexion
             echo "Mot de passe incorrect.";
             return;
         }
+    }
+
+    public function logout() {
+        session_start();
+        session_destroy();
+        header('Location: home');
+        exit();
     }
     
 }

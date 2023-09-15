@@ -8,6 +8,7 @@ include __DIR__ . '/config.php';
 require_once(__DIR__ . '/php/database_config.php');
 require_once __DIR__ . '/php/Controller/MovieController.php';
 require_once __DIR__ . '/php/Controller/LoginController.php';
+require_once __DIR__ . '/php/Controller/UserController.php';
 
 $logFilePath = __DIR__ . '/logs/debug.log';
 $requestUri = $_SERVER['REQUEST_URI'];
@@ -30,6 +31,22 @@ switch ($action) {
     case 'login':
         $controller = new LoginController();
         $controller->renderLoginPage();
+        break;
+    case 'login-submit':
+        $controller = new LoginController();
+        $controller->login();
+        break;
+    case 'register':
+        $controller = new UserController();
+        $controller->renderRegister();
+        break;
+    case 'register-submit':
+        $controller = new UserController();
+        $controller->register();
+        break;
+    case 'logout':
+        $controller = new LoginController();
+        $controller->logout();
         break;
     default:
         echo 'Page non trouvée';
